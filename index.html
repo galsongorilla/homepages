@@ -5,11 +5,9 @@
 <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5, user-scalable=no, initial-scale=1.0" />
 <title>海の家 ギャルソンゴリラ | 由比ヶ浜</title>
 
-<!-- fonts start -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
-<!-- fonts end -->
 
 <style>
     :root {
@@ -95,14 +93,14 @@
         transform: translate(-50%, -50%);
         width: 180%;
         max-width: 1200px;
-        opacity: 0.2; /* 文字が見えやすいように薄く透かす */
+        opacity: 0.2;
         z-index: 0;
         pointer-events: none;
     }
 
     .mv_inner {
         position: relative;
-        z-index: 1; /* 背景よりも前に文字を配置 */
+        z-index: 1;
     }
     .mv_inner h1 {
         font-size: 3.5vw;
@@ -273,8 +271,15 @@
         margin-left: 10px;
         border-radius: 4px;
     }
-    input[type="text"], input[type="email"], input[type="tel"],
-    input[type="number"], input[type="datetime-local"] {
+    .form-group span.opt {
+        background: #555;
+        color: #fff;
+        font-size: 0.8rem;
+        padding: 2px 6px;
+        margin-left: 10px;
+        border-radius: 4px;
+    }
+    input[type="text"], input[type="tel"] {
         width: 100%;
         padding: 15px;
         box-sizing: border-box;
@@ -284,21 +289,98 @@
         border-radius: 4px;
         font-size: 1rem;
     }
-    input:focus {
+    input:focus, select:focus {
         outline: none;
         border-color: var(--main-pink);
     }
-    .radio-group {
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
+
+    /* 日付・時間・セレクトボックス等カスタムUI */
+    select.custom-select {
+        width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+        background: #000;
+        color: #fff;
+        border: 1px solid #444;
+        border-radius: 4px;
+        font-size: 1rem;
+        appearance: none;
+        background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+        background-repeat: no-repeat;
+        background-position: right 15px top 50%;
+        background-size: 12px auto;
     }
-    .radio-group label {
+
+    .date-scroll-container {
+        display: flex;
+        overflow-x: auto;
+        gap: 10px;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: var(--main-pink) #000;
+    }
+    .date-scroll-container::-webkit-scrollbar {
+        height: 6px;
+    }
+    .date-scroll-container::-webkit-scrollbar-track {
+        background: #000;
+    }
+    .date-scroll-container::-webkit-scrollbar-thumb {
+        background-color: var(--main-pink);
+        border-radius: 10px;
+    }
+    .date-btn {
+        flex: 0 0 auto;
+        background: #1a1a1a;
+        border: 1px solid #444;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.3s;
+        font-size: 1rem;
+    }
+    .date-btn.active {
+        background: var(--main-pink);
+        border-color: var(--main-pink);
+        font-weight: bold;
+    }
+    .day-span {
+        font-size: 0.8rem;
+        color: #aaa;
+    }
+    .date-btn.active .day-span {
+        color: #fff;
+    }
+
+    .radio-vertical-group, .checkbox-vertical-group {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .radio-vertical-group label, .checkbox-vertical-group label {
         display: flex;
         align-items: center;
-        gap: 5px;
+        gap: 10px;
         cursor: pointer;
+        background: #000;
+        padding: 15px;
+        border: 1px solid #444;
+        border-radius: 4px;
+        font-size: 0.95rem;
+        transition: border-color 0.3s;
+        margin-bottom: 0;
     }
+    .radio-vertical-group label:hover, .checkbox-vertical-group label:hover {
+        border-color: var(--main-pink);
+    }
+    input[type="radio"], input[type="checkbox"] {
+        accent-color: var(--main-pink);
+        transform: scale(1.2);
+    }
+
     .btn_submit {
         background: var(--main-pink);
         color: #fff;
@@ -356,16 +438,16 @@
         <div class="header_inner">
             <div class="header_logo">
                 <a href="#anc_firstview">
-                    <img src="LINE_ALBUM_20260802_260802_11.jpg" alt="garçon gorilla logo" class="logo-img">
+                    <img src="LINE_ALBUM_20260802_260802_11.jpg" alt="garçon gorilla logo" class="logo-img" onerror="this.src='https://placehold.co/40x40/ff1493/ffffff?text=G'">
                     GARÇON GORILLA
                 </a>
             </div>
             <nav>
                 <ul class="header_nav_list">
+                    <li class="header_nav_item"><a href="#anc_reserve">RESERVE</a></li>
                     <li class="header_nav_item"><a href="#anc_campaign">CAMPAIGN</a></li>
                     <li class="header_nav_item"><a href="#anc_menu">MENU</a></li>
                     <li class="header_nav_item"><a href="#anc_about">ABOUT</a></li>
-                    <li class="header_nav_item"><a href="#anc_reserve">RESERVE</a></li>
                 </ul>
             </nav>
         </div>
@@ -374,24 +456,87 @@
     <!-- Main Visual -->
     <div class="l_mv js_mv">
         <!-- 背景用の透かしゴリラ画像 -->
-        <img src="LINE_ALBUM_20260802_260802_11_3.jpg" alt="" class="mv-bg-gorilla">
+        <img src="LINE_ALBUM_20260802_260802_11_3.jpg" alt="" class="mv-bg-gorilla" onerror="this.style.display='none'">
         
         <div class="mv_inner is_fade_in">
             <h1>ギャルソンゴリラ</h1>
             <p>YUIGAHAMA BEACH HOUSE</p>
             <p style="color: var(--main-pink); font-size: 1.5rem; font-weight: 900;">浴びるほどの夏しよう</p>
-            <img src="LINE_ALBUM_20260802_260802_10.jpg" alt="飲み放題＆海ギョプサル 学割3,500円" class="mv-poster">
+            <img src="LINE_ALBUM_20260802_260802_10.jpg" alt="飲み放題＆海ギョプサル 学割3,500円" class="mv-poster" onerror="this.src='https://placehold.co/600x400/1a1a1a/ff1493?text=Special+Campaign'">
         </div>
     </div>
 
     <article>
+        <!-- Reservation Section (浴びるほどの夏しようの直下へ移動) -->
+        <section class="l_product" id="anc_reserve">
+            <h2>RESERVATION</h2>
+            <div class="form_inner">
+                <form id="reserveForm">
+                    
+                    <div class="form-group">
+                        <label for="name">お名前<span class="req">必須</span></label>
+                        <input type="text" id="name" name="name" placeholder="例：山田 太郎" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>予約日<span class="req">必須</span></label>
+                        <div class="date-scroll-container" id="dateButtons">
+                            <!-- JSで直近2週間のボタンを生成 -->
+                        </div>
+                        <input type="hidden" id="selectedDate" name="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="time">予約時間<span class="req">必須</span></label>
+                        <select id="time" name="time" required class="custom-select">
+                            <!-- JSで9:00〜20:30 (15分刻み) を生成 -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="people">人数<span class="req">必須</span></label>
+                        <select id="people" name="people" required class="custom-select">
+                            <!-- JSで1名〜20名を生成 -->
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>注文内容<span class="req">必須</span></label>
+                        <div class="radio-vertical-group">
+                            <label><input type="radio" name="order_plan" value="席のみ(混雑時2時間制)" required> 席のみ(混雑時2時間制)</label>
+                            <label><input type="radio" name="order_plan" value="(学生)サムギョプサルセット&飲み放題3,500円" required> (学生)サムギョプサルセット&飲み放題3,500円</label>
+                            <label><input type="radio" name="order_plan" value="(学生)ジンギスカンセット&飲み放題3,500円" required> (学生)ジンギスカンセット&飲み放題3,500円</label>
+                            <label><input type="radio" name="order_plan" value="(大人)サムギョプサルセット&飲み放題4,500円" required> (大人)サムギョプサルセット&飲み放題4,500円</label>
+                            <label><input type="radio" name="order_plan" value="(大人)ジンギスカンセット&飲み放題4,500円" required> (大人)ジンギスカンセット&飲み放題4,500円</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>予約でシャンパンがお得！<span class="opt">任意</span></label>
+                        <div class="checkbox-vertical-group">
+                            <label><input type="checkbox" name="champagne" value="カフェパリ6,000→5,500"> カフェパリ 6,000円 → 5,500円</label>
+                            <label><input type="checkbox" name="champagne" value="Rose12,000→11,000"> Rose 12,000円 → 11,000円</label>
+                            <label><input type="checkbox" name="champagne" value="ヴーヴクリコ イエローラベル33,000→30,000"> ヴーヴクリコ イエローラベル 33,000円 → 30,000円</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">電話番号<span class="req">必須</span></label>
+                        <input type="tel" id="phone" name="phone" placeholder="例：090-1234-5678" required>
+                    </div>
+                    
+                    <button type="submit" class="btn_submit">この内容で予約する</button>
+                </form>
+            </div>
+        </section>
+
         <!-- Campaign & Services -->
         <section id="anc_campaign">
             <h2>CAMPAIGN & SERVICES</h2>
             
             <!-- Instagram Campaign -->
             <div class="highlight-box blue">
-                <img src="LINE_ALBUM_20260802_260802_1.jpg" alt="フォロー＆シェアでドリンクGET！">
+                <img src="LINE_ALBUM_20260802_260802_1.jpg" alt="フォロー＆シェアでドリンクGET！" onerror="this.src='https://placehold.co/300x200/00aaff/ffffff?text=Instagram'">
                 <div class="highlight-text">
                     <h3 style="color: var(--light-blue); font-size: 1.5rem; margin-top: 0;">フォロー＆シェアでドリンクGET！</h3>
                     <p>Instagramのアカウントフォローとストーリーズでのメンションで、<strong>800円以下のドリンク1杯サービス</strong>いたします！</p>
@@ -401,7 +546,7 @@
 
             <!-- In-Store Services -->
             <div class="highlight-box">
-                <img src="LINE_ALBUM_20260802_260802_2.jpg" alt="店内サービス">
+                <img src="LINE_ALBUM_20260802_260802_2.jpg" alt="店内サービス" onerror="this.src='https://placehold.co/300x200/1a1a1a/ff1493?text=Services'">
                 <div class="highlight-text">
                     <h3 style="color: var(--main-pink); font-size: 1.5rem; margin-top: 0;">充実の店内サービス</h3>
                     <ul>
@@ -421,25 +566,22 @@
         <section id="anc_menu">
             <h2>FOOD MENU</h2>
             <div class="grid-3">
-                <!-- サムギョプサル風セット -->
                 <div class="card">
-                    <img src="LINE_ALBUM_20260802_260802_8.jpg" alt="サムギョプサル風セット">
+                    <img src="LINE_ALBUM_20260802_260802_8.jpg" alt="サムギョプサル風セット" onerror="this.src='https://placehold.co/400x300/1a1a1a/ffffff?text=Food'">
                     <h3>サムギョプサル風セット</h3>
                     <p>【セット内容】サムギョプサル、野菜盛り合わせ、道具一式</p>
                     <p class="price">1人前 ¥2,500<span style="font-size: 0.8rem;">(税込)</span></p>
                     <p style="font-size: 0.8rem; color: #aaa;">※2人前から承ります</p>
                 </div>
-                <!-- BBQジンギスカンセット -->
                 <div class="card">
-                    <img src="LINE_ALBUM_20260802_260802_9.jpg" alt="BBQジンギスカンセット">
+                    <img src="LINE_ALBUM_20260802_260802_9.jpg" alt="BBQジンギスカンセット" onerror="this.src='https://placehold.co/400x300/1a1a1a/ffffff?text=Food'">
                     <h3>BBQジンギスカンセット</h3>
                     <p>【セット内容】厳選ラム肉、特製ジンギスカンソース、野菜盛り合わせ、道具一式</p>
                     <p class="price">1人前 ¥2,500<span style="font-size: 0.8rem;">(税込)</span></p>
                     <p style="font-size: 0.8rem; color: #aaa;">※2人前から承ります</p>
                 </div>
-                <!-- 四万十ポークソーセージ -->
                 <div class="card">
-                    <img src="LINE_ALBUM_20260802_260802_7.jpg" alt="四万十ポークソーセージ">
+                    <img src="LINE_ALBUM_20260802_260802_7.jpg" alt="四万十ポークソーセージ" onerror="this.src='https://placehold.co/400x300/1a1a1a/ffffff?text=Food'">
                     <h3>高級 四万十ポークソーセージ</h3>
                     <p>鉄板の音と香り、最高！店長おすすめの一押しメニュー。</p>
                     <p class="price">3本 ¥800</p>
@@ -451,16 +593,14 @@
         <section>
             <h2>DRINK MENU</h2>
             <div class="grid-2">
-                <!-- BELAIRE -->
                 <div class="card">
-                    <img src="LINE_ALBUM_20260802_260802_5.jpg" alt="LUC BELAIRE FANTÔME">
+                    <img src="LINE_ALBUM_20260802_260802_5.jpg" alt="LUC BELAIRE FANTÔME" onerror="this.src='https://placehold.co/400x300/1a1a1a/ffffff?text=Drink'">
                     <h3>LUC BELAIRE FANTÔME</h3>
                     <p>TRUE FRENCH LUXURY 本場フランスの贅沢な味わい<br>レアロゼ ファントム / ゴールド ファントム</p>
                     <p class="price">BOTTLE ¥10,000</p>
                 </div>
-                <!-- DON JULIO 1942 -->
                 <div class="card">
-                    <img src="LINE_ALBUM_20260802_260802_4.jpg" alt="DON JULIO 1942 MINI">
+                    <img src="LINE_ALBUM_20260802_260802_4.jpg" alt="DON JULIO 1942 MINI" onerror="this.src='https://placehold.co/400x300/1a1a1a/ffffff?text=Drink'">
                     <h3>DON JULIO 1942 MINI</h3>
                     <p>100% AGAVE 世界No.1テキーラ ドン・フリオ</p>
                     <p class="price">1 mini Bottle ¥6,000<br>10 mini Bottles ¥60,000</p>
@@ -469,7 +609,7 @@
             
             <div style="margin-top: 40px; text-align: center;">
                 <h3 style="color: var(--main-pink); margin-bottom: 15px;">ALL DRINK MENU</h3>
-                <img src="LINE_ALBUM_20260802_260802_6.jpg" alt="ドリンクメニュー一覧" style="width: 100%; max-width: 800px; border-radius: 8px; border: 1px solid #333;">
+                <img src="LINE_ALBUM_20260802_260802_6.jpg" alt="ドリンクメニュー一覧" onerror="this.src='https://placehold.co/800x400/1a1a1a/ffffff?text=Drink+Menu'" style="width: 100%; max-width: 800px; border-radius: 8px; border: 1px solid #333;">
             </div>
         </section>
 
@@ -495,68 +635,6 @@
                 </dl>
             </div>
         </section>
-
-  
-      <!-- ... existing code ... -->
-        <!-- Reservation Section -->
-        <section class="l_product" id="anc_reserve">
-            <h2>RESERVATION</h2>
-            <div class="form_inner">
-                <form id="reserveForm">
-                    <div class="form-group">
-                        <label for="name">お名前<span class="req">必須</span></label>
-                        <input type="text" id="name" name="name" placeholder="例：山田 太郎" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>予約日時<span class="req">必須</span></label>
-                        <div style="display: flex; gap: 10px;">
-                            <input type="date" id="date" name="date" required style="flex: 1;">
-                            <input type="time" id="time" name="time" required style="flex: 1;">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="people">訪問人数<span class="req">必須</span></label>
-                        <input type="number" id="people" name="people" min="1" placeholder="例：4" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="age">年齢<span class="req">必須</span></label>
-                        <input type="number" id="age" name="age" min="0" placeholder="例：21" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>性別<span class="req">必須</span></label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="gender" value="男性" required> 男性</label>
-                            <label><input type="radio" name="gender" value="女性" required> 女性</label>
-                            <label><input type="radio" name="gender" value="その他" required> その他</label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>学生区分<span class="req">必須</span></label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="student" value="学生" required> 学生</label>
-                            <label><input type="radio" name="student" value="学生以外" required> 学生以外</label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">メールアドレス<span class="req">必須</span></label>
-                        <input type="email" id="email" name="email" placeholder="例：mail@example.com" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="phone">電話番号<span class="req">必須</span></label>
-                        <input type="tel" id="phone" name="phone" placeholder="例：090-1234-5678" required>
-                    </div>
-                    
-                    <button type="submit" class="btn_submit">この内容で予約する</button>
-                </form>
-            </div>
-        </section>
     </article>
 
     <!-- Footer -->
@@ -570,28 +648,135 @@
     </footer>
 
     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- 1. 日付UIの生成（当日から8/31まで） ---
+            const dateButtonsContainer = document.getElementById('dateButtons');
+            const selectedDateInput = document.getElementById('selectedDate');
+            const today = new Date();
+            const days = ['日', '月', '火', '水', '木', '金', '土'];
+
+            // 終了日を今年の8月31日に設定 (※月は0から始まるため7が8月)
+            const endDate = new Date(today.getFullYear(), 7, 31);
+            
+            // 今日から8月31日までの日数を計算
+            let diffTime = endDate.getTime() - today.getTime();
+            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            // 既に8/31以降の場合はフェイルセーフとして14日間分表示
+            if (diffDays < 0) diffDays = 14; 
+
+            for (let i = 0; i <= diffDays; i++) {
+                const d = new Date();
+                d.setDate(today.getDate() + i);
+                const month = d.getMonth() + 1;
+                const date = d.getDate();
+                const day = days[d.getDay()];
+                
+                // YYYY-MM-DD フォーマット
+                const dateStr = `${d.getFullYear()}-${String(month).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+                
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'date-btn';
+                btn.innerHTML = `<span>${month}/${date}</span><br><span class="day-span">(${day})</span>`;
+                btn.dataset.date = dateStr;
+                
+                // 初日をデフォルト選択
+                if (i === 0) {
+                    btn.classList.add('active');
+                    selectedDateInput.value = dateStr;
+                }
+                
+                // クリックイベント
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    selectedDateInput.value = this.dataset.date;
+                });
+                
+                dateButtonsContainer.appendChild(btn);
+            }
+
+            // --- 2. 時間の生成 (9:00〜20:30, 15分刻み) ---
+            const timeSelect = document.getElementById('time');
+            const startHour = 9;
+            const endHour = 20;
+            const endMinute = 30;
+
+            for (let h = startHour; h <= endHour; h++) {
+                for (let m = 0; m < 60; m += 15) {
+                    // 20:30以降はスキップ
+                    if (h === endHour && m > endMinute) continue;
+                    
+                    const timeStr = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+                    const option = document.createElement('option');
+                    option.value = timeStr;
+                    option.textContent = timeStr;
+                    
+                    // 17:00を一発目で選択状態に
+                    if (timeStr === '17:00') {
+                        option.selected = true;
+                    }
+                    timeSelect.appendChild(option);
+                }
+            }
+
+            // --- 3. 人数の生成 (1〜20名) ---
+            const peopleSelect = document.getElementById('people');
+            for(let i = 1; i <= 20; i++) {
+                const option = document.createElement('option');
+                option.value = i + '名';
+                option.textContent = i + '名';
+                // デフォルトは2名にするなど任意（今回は最初の1名がデフォルト）
+                peopleSelect.appendChild(option);
+            }
+        });
+
+        // --- 4. フォーム送信処理 ---
         document.getElementById('reserveForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = this.querySelector('.btn_submit');
             btn.disabled = true;
             btn.textContent = '送信中...';
 
-            // name属性がついている入力項目（dateやtimeなど）を自動で全て抽出する
             const formData = new FormData(this);
-            const data = Object.fromEntries(formData.entries());
+            const data = {};
+            
+            // 同名のチェックボックス(champagne)をカンマ区切りで一つの文字列にする処理
+            for (let [key, value] of formData.entries()) {
+                if (data[key]) {
+                    data[key] += ', ' + value;
+                } else {
+                    data[key] = value;
+                }
+            }
 
             // ★ここにGoogle Apps Scriptで発行されたWebアプリURLを貼り付けてください★
-            const GAS_URL = "https://script.google.com/macros/s/AKfycbzLqBfH0aVv3nulLHsie398Fv5aUnnXJAIbhUPO9D4UW7JsR_hRiOVphnJ5ZrjmeFg/exec";
+            const GAS_URL = "https://script.google.com/macros/s/AKfycbxoskFxGbv87p4q064xxd5eAQlHE_8lhKz5QKVfjcdYVfYKhHFplqXFzYaPER5zOxH_/exec";
 
             try {
                 await fetch(GAS_URL, {
                     method: 'POST',
-                    mode: 'no-cors',
+                    mode: 'no-cors', // クロスオリジンのためno-corsを使用
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
+                
+                // no-cors の場合、エラーじゃなくても opaque レスポンスが返るので
+                // ここまで到達すれば送信成功として扱う
                 alert('ご予約が完了しました！ご来店をお待ちしております。');
+                
+                // フォームをリセットし、デフォルト状態に戻す
                 this.reset();
+                document.querySelectorAll('.date-btn').forEach((b, index) => {
+                    b.classList.remove('active');
+                    if(index === 0) {
+                        b.classList.add('active');
+                        document.getElementById('selectedDate').value = b.dataset.date;
+                    }
+                });
+                document.getElementById('time').value = '17:00';
+
             } catch (err) {
                 alert('送信に失敗しました。時間をおいて再度お試しいただくか、InstagramのDMにてお問い合わせください。');
             } finally {
