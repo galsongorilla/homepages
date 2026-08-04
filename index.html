@@ -758,7 +758,7 @@
                 await fetch(GAS_URL, {
                     method: 'POST',
                     mode: 'no-cors', // クロスオリジンのためno-corsを使用
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'text/plain' },
                     body: JSON.stringify(data)
                 });
                 
