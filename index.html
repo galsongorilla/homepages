@@ -1,789 +1,260 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5, user-scalable=no, initial-scale=1.0" />
-<title>海の家 ギャルソンゴリラ | 由比ヶ浜</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
-
-<style>
-    :root {
-        --bg-color: #0d0d0d;
-        --text-color: #ffffff;
-        --main-pink: #ff1493;
-        --dark-pink: #c9006b;
-        --gray-bg: #1a1a1a;
-        --light-blue: #00aaff;
-    }
-    body {
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        font-family: 'Noto Sans JP', sans-serif;
-        margin: 0;
-        padding: 0;
-        line-height: 1.6;
-    }
-    a {
-        color: var(--text-color);
-        text-decoration: none;
-    }
-    
-    /* Header */
-    .l_header {
-        background: #000;
-        border-bottom: 2px solid var(--main-pink);
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        padding: 10px 5%;
-    }
-    .header_inner {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        max-width: 1000px;
-        margin: 0 auto;
-    }
-    .header_logo a {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 1.5rem;
-        font-weight: 900;
-        color: var(--main-pink);
-        letter-spacing: 1px;
-    }
-    .logo-img {
-        height: 40px;
-        width: auto;
-    }
-    .header_nav_list {
-        list-style: none;
-        display: flex;
-        gap: 20px;
-        margin: 0;
-        padding: 0;
-    }
-    .header_nav_item a {
-        font-weight: bold;
-        transition: color 0.3s;
-    }
-    .header_nav_item a:hover {
-        color: var(--main-pink);
-    }
-
-    /* Main Visual */
-    .l_mv {
-        background: linear-gradient(135deg, #000000 0%, #2a0016 100%);
-        text-align: center;
-        padding: 60px 20px;
-        border-bottom: 1px solid #333;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    /* 透かし背景のゴリラ */
-    .mv-bg-gorilla {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 180%;
-        max-width: 1200px;
-        opacity: 0.2;
-        z-index: 0;
-        pointer-events: none;
-    }
-
-    .mv_inner {
-        position: relative;
-        z-index: 1;
-    }
-    .mv_inner h1 {
-        font-size: 3.5vw;
-        color: var(--main-pink);
-        margin: 0 0 10px 0;
-        text-shadow: 2px 2px 10px rgba(255, 20, 147, 0.5);
-    }
-    .mv_inner p {
-        font-size: 1.2rem;
-        font-weight: 700;
-        margin-bottom: 20px;
-    }
-    .mv-poster {
-        max-width: 100%;
-        width: 600px;
-        border-radius: 10px;
-        box-shadow: 0 10px 20px rgba(255, 20, 147, 0.3);
-        margin-top: 20px;
-    }
-
-    /* Sections */
-    article section {
-        padding: 60px 5%;
-        max-width: 900px;
-        margin: 0 auto;
-    }
-    h2 {
-        font-size: 2.2rem;
-        border-left: 6px solid var(--main-pink);
-        padding-left: 15px;
-        margin-bottom: 30px;
-        color: var(--main-pink);
-    }
-
-    /* Layout Grids */
-    .grid-2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
-    .grid-3 {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-    }
-
-    /* Cards */
-    .card {
-        background: var(--gray-bg);
-        border: 1px solid #333;
-        border-radius: 8px;
-        overflow: hidden;
-        text-align: center;
-        padding-bottom: 15px;
-        transition: transform 0.3s;
-    }
-    .card:hover {
-        transform: translateY(-5px);
-        border-color: var(--main-pink);
-    }
-    .card img {
-        width: 100%;
-        height: auto;
-        display: block;
-        margin-bottom: 15px;
-    }
-    .card h3 {
-        color: var(--main-pink);
-        font-size: 1.2rem;
-        margin: 0 10px 10px;
-    }
-    .card p {
-        margin: 0 10px 10px;
-        font-size: 0.9rem;
-    }
-    .card .price {
-        font-size: 1.3rem;
-        font-weight: bold;
-        color: #fff;
-    }
-
-    /* Highlight box (Campaign / Services) */
-    .highlight-box {
-        background: var(--gray-bg);
-        border: 2px solid var(--main-pink);
-        border-radius: 10px;
-        padding: 30px;
-        display: flex;
-        align-items: center;
-        gap: 30px;
-        margin-bottom: 30px;
-    }
-    .highlight-box.blue {
-        border-color: var(--light-blue);
-    }
-    .highlight-box img {
-        max-width: 300px;
-        width: 100%;
-        border-radius: 8px;
-    }
-    .highlight-text ul {
-        list-style: none;
-        padding: 0;
-    }
-    .highlight-text li {
-        margin-bottom: 10px;
-        font-weight: bold;
-        font-size: 1.1rem;
-    }
-    .highlight-text li::before {
-        content: "✔";
-        color: var(--main-pink);
-        margin-right: 10px;
-    }
-    .highlight-box.blue .highlight-text li::before {
-        color: var(--light-blue);
-    }
-
-    /* About */
-    .about_box {
-        background: var(--gray-bg);
-        padding: 30px;
-        border-radius: 8px;
-        border: 1px solid #333;
-    }
-    .about_box dl {
-        display: flex;
-        flex-wrap: wrap;
-        border-bottom: 1px solid #333;
-        padding-bottom: 15px;
-        margin-bottom: 15px;
-    }
-    .about_box dl:last-child {
-        border-bottom: none;
-        padding-bottom: 0;
-        margin-bottom: 0;
-    }
-    .about_box dt {
-        width: 30%;
-        font-weight: bold;
-        color: var(--main-pink);
-    }
-    .about_box dd {
-        width: 70%;
-        margin: 0;
-    }
-
-    /* Form */
-    .form_inner {
-        background: var(--gray-bg);
-        padding: 40px;
-        border-radius: 8px;
-        border: 1px solid #333;
-    }
-    .form-group {
-        margin-bottom: 25px;
-    }
-    .form-group label {
-        display: block;
-        margin-bottom: 10px;
-        font-weight: bold;
-    }
-    .form-group span.req {
-        background: var(--main-pink);
-        color: #000;
-        font-size: 0.8rem;
-        padding: 2px 6px;
-        margin-left: 10px;
-        border-radius: 4px;
-    }
-    .form-group span.opt {
-        background: #555;
-        color: #fff;
-        font-size: 0.8rem;
-        padding: 2px 6px;
-        margin-left: 10px;
-        border-radius: 4px;
-    }
-    input[type="text"], input[type="tel"] {
-        width: 100%;
-        padding: 15px;
-        box-sizing: border-box;
-        background: #000;
-        color: #fff;
-        border: 1px solid #444;
-        border-radius: 4px;
-        font-size: 1rem;
-    }
-    input:focus, select:focus {
-        outline: none;
-        border-color: var(--main-pink);
-    }
-
-    /* 日付・時間・セレクトボックス等カスタムUI */
-    select.custom-select {
-        width: 100%;
-        padding: 15px;
-        box-sizing: border-box;
-        background: #000;
-        color: #fff;
-        border: 1px solid #444;
-        border-radius: 4px;
-        font-size: 1rem;
-        appearance: none;
-        background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
-        background-repeat: no-repeat;
-        background-position: right 15px top 50%;
-        background-size: 12px auto;
-    }
-
-    .date-scroll-container {
-        display: flex;
-        overflow-x: auto;
-        gap: 10px;
-        padding-bottom: 10px;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: thin;
-        scrollbar-color: var(--main-pink) #000;
-    }
-    .date-scroll-container::-webkit-scrollbar {
-        height: 6px;
-    }
-    .date-scroll-container::-webkit-scrollbar-track {
-        background: #000;
-    }
-    .date-scroll-container::-webkit-scrollbar-thumb {
-        background-color: var(--main-pink);
-        border-radius: 10px;
-    }
-    .date-btn {
-        flex: 0 0 auto;
-        background: #1a1a1a;
-        border: 1px solid #444;
-        color: #fff;
-        padding: 10px 20px;
-        border-radius: 8px;
-        cursor: pointer;
-        text-align: center;
-        transition: all 0.3s;
-        font-size: 1rem;
-    }
-    .date-btn.active {
-        background: var(--main-pink);
-        border-color: var(--main-pink);
-        font-weight: bold;
-    }
-    .day-span {
-        font-size: 0.8rem;
-        color: #aaa;
-    }
-    .date-btn.active .day-span {
-        color: #fff;
-    }
-
-    .radio-vertical-group, .checkbox-vertical-group {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-    .radio-vertical-group label, .checkbox-vertical-group label {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        cursor: pointer;
-        background: #000;
-        padding: 15px;
-        border: 1px solid #444;
-        border-radius: 4px;
-        font-size: 0.95rem;
-        transition: border-color 0.3s;
-        margin-bottom: 0;
-    }
-    .radio-vertical-group label:hover, .checkbox-vertical-group label:hover {
-        border-color: var(--main-pink);
-    }
-    input[type="radio"], input[type="checkbox"] {
-        accent-color: var(--main-pink);
-        transform: scale(1.2);
-    }
-
-    .btn_submit {
-        background: var(--main-pink);
-        color: #fff;
-        border: none;
-        padding: 20px;
-        font-size: 1.2rem;
-        font-weight: bold;
-        border-radius: 50px;
-        cursor: pointer;
-        width: 100%;
-        transition: background 0.3s;
-        margin-top: 20px;
-    }
-    .btn_submit:hover {
-        background: var(--dark-pink);
-    }
-
-    /* Footer */
-    .l_footer {
-        background: #000;
-        border-top: 2px solid var(--main-pink);
-        text-align: center;
-        padding: 40px 20px;
-    }
-    .instagram-btn {
-        display: inline-block;
-        background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-        color: #fff;
-        padding: 12px 30px;
-        border-radius: 30px;
-        font-weight: bold;
-        margin-bottom: 20px;
-    }
-    .instagram-btn:hover { opacity: 0.8; }
-    .copyright { color: #666; font-size: 0.9rem; }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-        .mv_inner h1 { font-size: 2rem; }
-        .about_box dt, .about_box dd { width: 100%; }
-        .about_box dt { margin-bottom: 5px; }
-        .header_nav_list { display: none; }
-        .form_inner { padding: 20px; }
-        .grid-2, .grid-3 { grid-template-columns: 1fr; }
-        .highlight-box { flex-direction: column; text-align: center; }
-        .highlight-box img { max-width: 100%; }
-        .highlight-text li::before { display: none; }
-    }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="由比ヶ浜の海の家・韓国ビストロ・ビーチパブ、GARÇON GORILLA。2026年7月1日〜8月31日、9:00〜21:00営業。">
+  <meta name="theme-color" content="#ef007a">
+  <meta property="og:title" content="GARÇON GORILLA 2026 | 由比ヶ浜">
+  <meta property="og:description" content="浴びるほどの夏しよう。飲み放題＆海ギョプサル 学割3,500円。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="messageImage_1787394930764.jpg">
+  <title>GARÇON GORILLA 2026 | 由比ヶ浜の海の家</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --pink:#ef007a; --blue:#08aeea; --yellow:#ffe000; --ink:#151515; --paper:#fffdf8; --line:rgba(21,21,21,.14); --shadow:0 18px 50px rgba(30,18,28,.14); --radius:26px; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:#f2eee8; font-family:"Noto Sans JP",sans-serif; line-height:1.65; overflow-x:hidden; }
+    button,input,select { font:inherit; }
+    button,a { -webkit-tap-highlight-color:transparent; }
+    img { display:block; max-width:100%; }
+    a { color:inherit; }
+    :focus-visible { outline:4px solid var(--yellow); outline-offset:3px; }
+    .site-shell { width:min(100%,780px); margin:0 auto; background:var(--paper); box-shadow:0 0 80px rgba(20,20,20,.14); min-height:100vh; }
+    .hero-photo { position:relative; height:clamp(210px,48vw,350px); overflow:hidden; background:#7ec8ed; }
+    .hero-photo>img { width:100%; height:100%; object-fit:cover; object-position:58% 48%; }
+    .brand-stamp { position:absolute; inset:20px auto auto 22px; display:flex; align-items:center; gap:10px; padding:8px 13px 8px 8px; border-radius:999px; color:#fff; background:rgba(15,15,15,.78); backdrop-filter:blur(8px); font-weight:900; letter-spacing:.04em; }
+    .brand-stamp img { width:38px; height:38px; border-radius:50%; object-fit:cover; }
+    .hero-copy { position:relative; padding:36px clamp(22px,6vw,54px) 44px; overflow:hidden; color:#fff; background:var(--pink); }
+    .hero-copy::after { content:"2026"; position:absolute; right:-12px; bottom:-45px; font:400 clamp(7rem,24vw,12rem)/1 "Anton",sans-serif; color:rgba(255,255,255,.09); }
+    .eyebrow { display:flex; align-items:center; gap:9px; margin:0 0 14px; font-size:.72rem; font-weight:900; letter-spacing:.18em; text-transform:uppercase; }
+    .eyebrow::before { content:""; width:26px; height:2px; background:var(--yellow); }
+    .hero-copy h1 { position:relative; z-index:1; max-width:520px; margin:0; font-size:clamp(2.55rem,10vw,5.2rem); line-height:1.04; letter-spacing:-.06em; }
+    .hero-copy h1 span { color:var(--yellow); }
+    .hero-meta { position:relative; z-index:1; margin:15px 0 24px; font-weight:700; }
+    .price-banner { position:relative; z-index:1; display:grid; grid-template-columns:1fr auto; align-items:center; gap:16px; padding:18px; border-radius:20px; background:var(--yellow); color:var(--ink); box-shadow:0 12px 0 rgba(104,0,50,.22); }
+    .price-banner small { display:block; font-weight:700; }
+    .price { margin-top:2px; font-size:clamp(1.8rem,7vw,2.65rem); font-weight:900; line-height:1.1; }
+    .price span { font-size:.9rem; }
+    .cta { display:inline-flex; align-items:center; justify-content:center; min-height:54px; padding:12px 24px; border:0; border-radius:999px; color:#fff; background:var(--ink); font-weight:900; text-decoration:none; cursor:pointer; transition:transform .18s ease,background .18s ease; }
+    .cta:hover { transform:translateY(-2px); background:#333; }
+    .section { padding:62px clamp(22px,6vw,54px); }
+    .section-head { margin-bottom:28px; }
+    .section-label { margin:0 0 4px; color:var(--pink); font:400 .78rem/1 "Anton",sans-serif; letter-spacing:.18em; text-transform:uppercase; }
+    .section h2 { margin:0; font-size:clamp(2rem,8vw,3.3rem); line-height:1.18; letter-spacing:-.04em; }
+    .services { color:#fff; background:var(--blue); }
+    .services .section-label { color:var(--yellow); }
+    .service-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+    .service-card { min-height:116px; padding:18px 14px; border:2px solid rgba(255,255,255,.45); border-radius:20px; background:rgba(255,255,255,.13); text-align:center; font-weight:900; }
+    .service-icon { display:block; margin-bottom:6px; font-size:1.8rem; }
+    .campaign { display:grid; grid-template-columns:74px 1fr; gap:18px; align-items:center; margin-top:24px; padding:18px; border-radius:22px; color:#fff; background:var(--pink); }
+    .instagram-cta { text-align:center; }
+    .instagram-hint { display:block; margin:0 0 5px; color:var(--yellow); font-size:.72rem; font-weight:900; white-space:nowrap; }
+    .instagram-link { display:grid; place-items:center; width:74px; height:74px; border:3px solid #fff; border-radius:22px; color:#fff; text-decoration:none; transition:transform .18s ease,background .18s ease; }
+    .instagram-link:hover { transform:translateY(-2px) rotate(-3deg); background:rgba(255,255,255,.14); }
+    .instagram-icon { position:relative; width:38px; height:38px; border:4px solid currentColor; border-radius:11px; }
+    .instagram-icon::before { content:""; position:absolute; width:13px; height:13px; left:50%; top:50%; border:4px solid currentColor; border-radius:50%; transform:translate(-50%,-50%); }
+    .instagram-icon::after { content:""; position:absolute; width:5px; height:5px; right:4px; top:4px; border-radius:50%; background:currentColor; }
+    .campaign strong { color:var(--yellow); }
+    .campaign p { margin:0; font-size:.9rem; }
+    .menu-section { background:#fff; }
+    .accordion { display:grid; gap:18px; }
+    .accordion-item { border-radius:24px; overflow:hidden; box-shadow:var(--shadow); }
+    .accordion-trigger { width:100%; min-height:124px; padding:24px; border:0; display:flex; justify-content:space-between; align-items:center; gap:18px; text-align:left; font-weight:900; cursor:pointer; }
+    .accordion-item:first-child .accordion-trigger { color:var(--yellow); background:var(--pink); }
+    .accordion-item:last-child .accordion-trigger { color:var(--pink); background:var(--blue); }
+    .accordion-title small { display:block; opacity:.8; letter-spacing:.13em; text-transform:uppercase; }
+    .accordion-title span { font-size:clamp(1.65rem,6vw,2.4rem); }
+    .accordion-mark { font-size:2.2rem; transition:transform .25s ease; }
+    .accordion-trigger[aria-expanded="true"] .accordion-mark { transform:rotate(45deg); }
+    .accordion-panel { padding:0 20px; background:#fff; }
+    .accordion-panel[hidden] { display:none; }
+    .menu-list { display:grid; gap:18px; padding:24px 0; }
+    .menu-card { display:grid; grid-template-columns:112px 1fr; gap:16px; align-items:center; }
+    .menu-card img { width:112px; height:112px; object-fit:cover; border-radius:16px; }
+    .menu-card h3 { margin:0 0 4px; font-size:1rem; line-height:1.35; }
+    .menu-card p { margin:0; color:#666; font-size:.82rem; }
+    .menu-card .menu-price { margin-top:6px; color:var(--pink); font-size:1rem; font-weight:900; }
+    .menu-kicker { margin:24px 0 -10px; color:var(--pink); font-size:1.1rem; font-weight:900; }
+    .menu-board { padding:4px 0 24px; }
+    .menu-board h3 { margin:0 0 12px; font-size:1.1rem; }
+    .menu-board img { width:100%; border-radius:18px; border:1px solid #333; background:#111; }
+    .full-menu-image { width:100%; border-radius:18px; }
+    .info { background:var(--yellow); }
+    .info-card { padding:26px; border-radius:var(--radius); background:#fff; box-shadow:var(--shadow); }
+    .info-card dl { margin:0; }
+    .info-row { display:grid; grid-template-columns:110px 1fr; gap:16px; padding:14px 0; border-bottom:1px solid var(--line); }
+    .info-row:last-child { border:0; }
+    .info-row dt { font-weight:900; }
+    .info-row dd { margin:0; }
+    .map-link { width:100%; margin-top:22px; }
+    .reservation { color:var(--ink); background:linear-gradient(180deg,#fff 0%,#ffe6f2 100%); }
+    .form-card { padding:clamp(20px,5vw,38px); border:2px solid rgba(239,0,122,.2); border-radius:var(--radius); background:#fff; box-shadow:var(--shadow); }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    .field { min-width:0; }
+    .field.full { grid-column:1/-1; }
+    .field-label,legend { display:block; margin-bottom:8px; font-weight:900; }
+    .required,.optional { display:inline-block; margin-left:7px; padding:2px 7px; border-radius:999px; font-size:.7rem; }
+    .required { color:#fff; background:var(--pink); }
+    .optional { color:#555; background:#eee; }
+    input,select { width:100%; min-height:52px; padding:12px 14px; border:2px solid #ddd; border-radius:13px; background:#fff; color:var(--ink); }
+    input:focus,select:focus { border-color:var(--pink); outline:none; box-shadow:0 0 0 4px rgba(239,0,122,.12); }
+    fieldset { margin:0; padding:0; border:0; }
+    .date-quick { display:flex; gap:9px; margin:0 -4px 10px; padding:4px 4px 12px; overflow-x:auto; overscroll-behavior-inline:contain; scroll-snap-type:x proximity; scrollbar-color:var(--pink) #f3d9e5; scrollbar-width:thin; -webkit-overflow-scrolling:touch; }
+    .date-button { flex:0 0 94px; min-height:76px; padding:9px; border:2px solid #ddd; border-radius:15px; background:#fff; font-weight:900; cursor:pointer; scroll-snap-align:start; }
+    .date-button.is-active { color:#fff; border-color:var(--pink); background:var(--pink); }
+    .date-hint { margin:0 0 8px; color:#666; font-size:.78rem; }
+    .calendar-wrap { display:grid; grid-template-columns:auto 1fr; gap:9px; align-items:center; padding:8px 12px; border-radius:13px; background:#fff3f8; }
+    .calendar-wrap input { min-height:42px; border:0; background:transparent; }
+    .radio-list { display:grid; gap:9px; }
+    .choice { display:grid; grid-template-columns:22px 1fr; align-items:start; gap:10px; padding:13px; border:2px solid #e4e4e4; border-radius:14px; cursor:pointer; }
+    .choice:has(input:checked) { border-color:var(--pink); background:#fff2f8; }
+    .choice input { width:20px; min-height:20px; margin:2px 0 0; accent-color:var(--pink); }
+    .choice small { display:block; color:#666; }
+    .champagne-list { display:grid; gap:10px; }
+    .champagne-row { display:grid; grid-template-columns:1fr 92px; gap:12px; align-items:center; padding:13px; border:2px solid #eee; border-radius:14px; }
+    .champagne-row strong { display:block; }
+    .champagne-row small { color:#666; }
+    .champagne-row input { min-height:44px; text-align:center; }
+    .summary { padding:22px; border-radius:18px; background:#fff6fa; border:2px solid rgba(239,0,122,.2); }
+    .summary h3 { margin:0 0 14px; color:var(--pink); }
+    .summary-line { display:flex; justify-content:space-between; gap:16px; padding:8px 0; }
+    .summary-total { margin-top:8px; padding-top:14px; border-top:2px solid var(--pink); font-size:1.35rem; font-weight:900; }
+    .privacy { margin:14px 0; color:#666; font-size:.78rem; }
+    .submit-button { width:100%; min-height:62px; border:0; border-radius:999px; color:#fff; background:var(--pink); font-size:1.1rem; font-weight:900; cursor:pointer; box-shadow:0 10px 0 #a80053; }
+    .submit-button:active { transform:translateY(5px); box-shadow:0 5px 0 #a80053; }
+    .submit-button:disabled { opacity:.55; cursor:wait; }
+    .form-status { margin:18px 0 0; padding:14px; border-radius:12px; font-weight:700; }
+    .form-status:empty { display:none; }
+    .form-status.success { color:#075b30; background:#dff8e9; }
+    .form-status.error { color:#842029; background:#f8d7da; }
+    footer { padding:42px 22px 96px; color:#fff; background:var(--ink); text-align:center; }
+    .footer-links { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-bottom:24px; }
+    footer a { color:var(--yellow); font-weight:900; }
+    footer p { margin:6px 0; font-size:.78rem; color:#bbb; }
+    .sticky-reserve { position:fixed; z-index:20; left:50%; bottom:14px; transform:translateX(-50%); width:min(calc(100% - 28px),720px); box-shadow:0 12px 28px rgba(0,0,0,.25); }
+    @media (min-width:620px) { .service-grid{grid-template-columns:repeat(3,1fr)} .menu-list{grid-template-columns:1fr 1fr} .menu-card{grid-template-columns:98px 1fr} .menu-card img{width:98px;height:98px} }
+    @media (max-width:560px) { .form-grid{grid-template-columns:1fr} .field.full{grid-column:auto} .price-banner{grid-template-columns:1fr} .price-banner .cta{width:100%} .campaign{grid-template-columns:64px 1fr;gap:14px} .instagram-link{width:64px;height:64px;border-radius:18px} .instagram-icon{width:34px;height:34px} .info-row{grid-template-columns:1fr;gap:2px} .champagne-row{grid-template-columns:1fr 78px} }
+    @media (prefers-reduced-motion:reduce) { html{scroll-behavior:auto} *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important} }
+  </style>
 </head>
-<body class="top" id="anc_firstview">
-
-    <!-- Header -->
-    <header class="l_header js_header">
-        <div class="header_inner">
-            <div class="header_logo">
-                <a href="#anc_firstview">
-                    <img src="LINE_ALBUM_20260802_260802_11.jpg" alt="garçon gorilla logo" class="logo-img" onerror="this.src='https://placehold.co/40x40/ff1493/ffffff?text=G'">
-                    GARÇON GORILLA
-                </a>
-            </div>
-            <nav>
-                <ul class="header_nav_list">
-                    <li class="header_nav_item"><a href="#anc_reserve">RESERVE</a></li>
-                    <li class="header_nav_item"><a href="#anc_campaign">CAMPAIGN</a></li>
-                    <li class="header_nav_item"><a href="#anc_menu">MENU</a></li>
-                    <li class="header_nav_item"><a href="#anc_about">ABOUT</a></li>
-                </ul>
-            </nav>
-        </div>
+<body>
+  <div class="site-shell">
+    <header id="top">
+      <div class="hero-photo">
+        <img src="messageImage_1787394930764.jpg" alt="由比ヶ浜の青い海と緑の山">
+        <div class="brand-stamp"><img src="LINE_ALBUM_20260802_260802_11.jpg" alt=""><span>GARÇON GORILLA 2026</span></div>
+      </div>
+      <div class="hero-copy">
+        <p class="eyebrow">Yuigahama Beach House</p>
+        <h1>浴びるほどの<br><span>夏しよう</span></h1>
+        <p class="hero-meta">由比ヶ浜海岸 ／ 2026.7.1–8.31 ／ 9:00–21:00<br><small>最終入店 20:30</small></p>
+        <div class="price-banner"><div><small>飲み放題＆海ギョプサル・学割</small><div class="price">¥3,500 <span>/ 人</span></div></div><a class="cta" href="#reservation">今すぐ予約</a></div>
+      </div>
     </header>
 
-    <!-- Main Visual -->
-    <div class="l_mv js_mv">
-        <!-- 背景用の透かしゴリラ画像 -->
-        <img src="LINE_ALBUM_20260802_260802_11_3.jpg" alt="" class="mv-bg-gorilla" onerror="this.style.display='none'">
-        
-        <div class="mv_inner is_fade_in">
-            <h1>ギャルソンゴリラ</h1>
-            <p>YUIGAHAMA BEACH HOUSE</p>
-            <p style="color: var(--main-pink); font-size: 1.5rem; font-weight: 900;">浴びるほどの夏しよう</p>
-            <img src="LINE_ALBUM_20260802_260802_10.jpg" alt="飲み放題＆海ギョプサル 学割3,500円" class="mv-poster" onerror="this.src='https://placehold.co/600x400/1a1a1a/ff1493?text=Special+Campaign'">
+    <main>
+      <section class="section services" id="services">
+        <div class="section-head"><p class="section-label">Service</p><h2>うれしいサービス</h2></div>
+        <div class="service-grid">
+          <div class="service-card"><span class="service-icon" aria-hidden="true">🚻</span>近くにトイレ</div>
+          <div class="service-card"><span class="service-icon" aria-hidden="true">🚬</span>タバコOK</div>
+          <div class="service-card"><span class="service-icon" aria-hidden="true">📶</span>Wi-Fiあり</div>
+          <div class="service-card"><span class="service-icon" aria-hidden="true">🔌</span>充電OK</div>
+          <div class="service-card"><span class="service-icon" aria-hidden="true">⛱️</span>日陰席あり</div>
+          <div class="service-card"><span class="service-icon" aria-hidden="true">🍟</span>他店フードOK</div>
         </div>
-    </div>
+        <div class="campaign"><div class="instagram-cta"><span class="instagram-hint">↓をクリック！</span><a class="instagram-link" href="https://www.instagram.com/garcon_gorilla_2026?igsi=anRmb2YxczR2YzM1" target="_blank" rel="noopener noreferrer" aria-label="GARÇON GORILLAのInstagramを開く"><span class="instagram-icon" aria-hidden="true"></span></a></div><p><strong>フォロー＆シェアでドリンクGET！</strong><br>Instagramのフォローとストーリーズでのメンションで、800円以下のドリンクを1杯サービス。</p></div>
+      </section>
 
-    <article>
-        <!-- Reservation Section (浴びるほどの夏しようの直下へ移動) -->
-        <section class="l_product" id="anc_reserve">
-            <h2>RESERVATION</h2>
-            <div class="form_inner">
-                <form id="reserveForm">
-                    
-                    <div class="form-group">
-                        <label for="name">お名前<span class="req">必須</span></label>
-                        <input type="text" id="name" name="name" placeholder="例：山田 太郎" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>予約日<span class="req">必須</span></label>
-                        <div class="date-scroll-container" id="dateButtons">
-                            <!-- JSで直近2週間のボタンを生成 -->
-                        </div>
-                        <input type="hidden" id="selectedDate" name="date" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="time">予約時間<span class="req">必須</span></label>
-                        <select id="time" name="time" required class="custom-select">
-                            <!-- JSで9:00〜20:30 (15分刻み) を生成 -->
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="people">人数<span class="req">必須</span></label>
-                        <select id="people" name="people" required class="custom-select">
-                            <!-- JSで1名〜20名を生成 -->
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>注文内容<span class="req">必須</span></label>
-                        <div class="radio-vertical-group">
-                            <label><input type="radio" name="order_plan" value="席のみ(混雑時2時間制)" required> 席のみ(混雑時2時間制)</label>
-                            <label><input type="radio" name="order_plan" value="(学生)サムギョプサルセット&飲み放題3,500円" required> (学生)サムギョプサルセット&飲み放題3,500円</label>
-                            <label><input type="radio" name="order_plan" value="(学生)ジンギスカンセット&飲み放題3,500円" required> (学生)ジンギスカンセット&飲み放題3,500円</label>
-                            <label><input type="radio" name="order_plan" value="(大人)サムギョプサルセット&飲み放題4,500円" required> (大人)サムギョプサルセット&飲み放題4,500円</label>
-                            <label><input type="radio" name="order_plan" value="(大人)ジンギスカンセット&飲み放題4,500円" required> (大人)ジンギスカンセット&飲み放題4,500円</label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>予約でシャンパンがお得！<span class="opt">任意</span></label>
-                        <div class="checkbox-vertical-group">
-                            <label><input type="checkbox" name="champagne" value="カフェパリ6,000→5,500"> カフェパリ 6,000円 → 5,500円</label>
-                            <label><input type="checkbox" name="champagne" value="Rose12,000→11,000"> Rose 12,000円 → 11,000円</label>
-                            <label><input type="checkbox" name="champagne" value="ヴーヴクリコ イエローラベル33,000→30,000"> ヴーヴクリコ イエローラベル 33,000円 → 30,000円</label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="phone">電話番号<span class="req">必須</span></label>
-                        <input type="tel" id="phone" name="phone" placeholder="例：090-1234-5678" required>
-                    </div>
-                    
-                    <button type="submit" class="btn_submit">この内容で予約する</button>
-                </form>
-            </div>
-        </section>
-
-        <!-- Campaign & Services -->
-        <section id="anc_campaign">
-            <h2>CAMPAIGN & SERVICES</h2>
-            
-            <!-- Instagram Campaign -->
-            <div class="highlight-box blue">
-                <img src="LINE_ALBUM_20260802_260802_1.jpg" alt="フォロー＆シェアでドリンクGET！" onerror="this.src='https://placehold.co/300x200/00aaff/ffffff?text=Instagram'">
-                <div class="highlight-text">
-                    <h3 style="color: var(--light-blue); font-size: 1.5rem; margin-top: 0;">フォロー＆シェアでドリンクGET！</h3>
-                    <p>Instagramのアカウントフォローとストーリーズでのメンションで、<strong>800円以下のドリンク1杯サービス</strong>いたします！</p>
-                    <p style="font-size: 0.9rem; color: #aaa;">※詳細はスタッフまでお尋ねください</p>
-                </div>
-            </div>
-
-            <!-- In-Store Services -->
-            <div class="highlight-box">
-                <img src="LINE_ALBUM_20260802_260802_2.jpg" alt="店内サービス" onerror="this.src='https://placehold.co/300x200/1a1a1a/ff1493?text=Services'">
-                <div class="highlight-text">
-                    <h3 style="color: var(--main-pink); font-size: 1.5rem; margin-top: 0;">充実の店内サービス</h3>
-                    <ul>
-                        <li>近くにトイレ！</li>
-                        <li>タバコOK！</li>
-                        <li>Wi-Fiあります</li>
-                        <li>充電できます</li>
-                        <li>日陰の席あります</li>
-                        <li>他店のフードOK！</li>
-                    </ul>
-                    <p style="font-size: 0.9rem; color: #aaa;">※その他はスタッフまでお尋ねください</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Food Menu -->
-        <section id="anc_menu">
-            <h2>FOOD MENU</h2>
-            <div class="grid-3">
-                <div class="card">
-                    <img src="LINE_ALBUM_20260802_260802_8.jpg" alt="サムギョプサル風セット" onerror="this.src='https://placehold.co/400x300/1a1a1a/ffffff?text=Food'">
-                    <h3>サムギョプサル風セット</h3>
-                    <p>【セット内容】サムギョプサル、野菜盛り合わせ、道具一式</p>
-                    <p class="price">1人前 ¥2,500<span style="font-size: 0.8rem;">(税込)</span></p>
-                    <p style="font-size: 0.8rem; color: #aaa;">※2人前から承ります</p>
-                </div>
-                <div class="card">
-                    <img src="LINE_ALBUM_20260802_260802_9.jpg" alt="BBQジンギスカンセット" onerror="this.src='https://placehold.co/400x300/1a1a1a/ffffff?text=Food'">
-                    <h3>BBQジンギスカンセット</h3>
-                    <p>【セット内容】厳選ラム肉、特製ジンギスカンソース、野菜盛り合わせ、道具一式</p>
-                    <p class="price">1人前 ¥2,500<span style="font-size: 0.8rem;">(税込)</span></p>
-                    <p style="font-size: 0.8rem; color: #aaa;">※2人前から承ります</p>
-                </div>
-                <div class="card">
-                    <img src="LINE_ALBUM_20260802_260802_7.jpg" alt="四万十ポークソーセージ" onerror="this.src='https://placehold.co/400x300/1a1a1a/ffffff?text=Food'">
-                    <h3>高級 四万十ポークソーセージ</h3>
-                    <p>鉄板の音と香り、最高！店長おすすめの一押しメニュー。</p>
-                    <p class="price">3本 ¥800</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Drink Menu -->
-        <section>
-            <h2>DRINK MENU</h2>
-            <div class="grid-2">
-                <div class="card">
-                    <img src="LINE_ALBUM_20260802_260802_5.jpg" alt="LUC BELAIRE FANTÔME" onerror="this.src='https://placehold.co/400x300/1a1a1a/ffffff?text=Drink'">
-                    <h3>LUC BELAIRE FANTÔME</h3>
-                    <p>TRUE FRENCH LUXURY 本場フランスの贅沢な味わい<br>レアロゼ ファントム / ゴールド ファントム</p>
-                    <p class="price">BOTTLE ¥10,000</p>
-                </div>
-                <div class="card">
-                    <img src="LINE_ALBUM_20260802_260802_4.jpg" alt="DON JULIO 1942 MINI" onerror="this.src='https://placehold.co/400x300/1a1a1a/ffffff?text=Drink'">
-                    <h3>DON JULIO 1942 MINI</h3>
-                    <p>100% AGAVE 世界No.1テキーラ ドン・フリオ</p>
-                    <p class="price">1 mini Bottle ¥6,000<br>10 mini Bottles ¥60,000</p>
-                </div>
-            </div>
-            
-            <div style="margin-top: 40px; text-align: center;">
-                <h3 style="color: var(--main-pink); margin-bottom: 15px;">ALL DRINK MENU</h3>
-                <img src="LINE_ALBUM_20260802_260802_6.jpg" alt="ドリンクメニュー一覧" onerror="this.src='https://placehold.co/800x400/1a1a1a/ffffff?text=Drink+Menu'" style="width: 100%; max-width: 800px; border-radius: 8px; border: 1px solid #333;">
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section class="l_about" id="anc_about">
-            <h2>INFORMATION</h2>
-            <div class="about_box">
-                <dl>
-                    <dt>場所</dt>
-                    <dd>由比ヶ浜海岸</dd>
-                </dl>
-                <dl>
-                    <dt>開催期間</dt>
-                    <dd>2026年8月1日 〜 8月31日</dd>
-                </dl>
-                <dl>
-                    <dt>営業時間</dt>
-                    <dd>9:00 - 21:30</dd>
-                </dl>
-                <dl>
-                    <dt>限定キャンペーン</dt>
-                    <dd><strong>【新感覚 海の家 BBQ】</strong><br>飲み放題＆海ギョプサル 学割 3,500円！<br>平日予約でシャンパン付き！</dd>
-                </dl>
-            </div>
-        </section>
-    </article>
-
-    <!-- Footer -->
-    <footer class="l_footer">
-        <div class="footer_inner">
-            <a href="https://www.instagram.com/garcon_gorilla_2026?igsh=c20xMWJ1aGx0Nnp4&utm_source=qr" target="_blank" class="instagram-btn">
-                公式Instagramはこちら
-            </a>
-            <p class="copyright">&copy; 2026 GARÇON GORILLA All Rights Reserved.</p>
+      <section class="section menu-section" id="menu">
+        <div class="section-head"><p class="section-label">Menu</p><h2>メニュー紹介</h2></div>
+        <div class="accordion">
+          <div class="accordion-item">
+            <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="food-panel" id="food-trigger"><span class="accordion-title"><small>Food</small><span>フードメニュー</span></span><span class="accordion-mark" aria-hidden="true">＋</span></button>
+            <div class="accordion-panel" id="food-panel" role="region" aria-labelledby="food-trigger" hidden><p class="menu-kicker">おすすめ商品</p><div class="menu-list">
+              <article class="menu-card"><img src="LINE_ALBUM_20260802_260802_8.jpg" alt="サムギョプサル風セット"><div><h3>サムギョプサル風セット</h3><p>お肉・野菜盛り合わせ・道具一式</p><p class="menu-price">1人前 ¥2,500（税込）</p><p>※2人前から</p></div></article>
+              <article class="menu-card"><img src="LINE_ALBUM_20260802_260802_9.jpg" alt="BBQジンギスカンセット"><div><h3>BBQジンギスカンセット</h3><p>厳選ラム肉・特製ソース・野菜・道具一式</p><p class="menu-price">1人前 ¥2,500（税込）</p><p>※2人前から</p></div></article>
+              <article class="menu-card"><img src="LINE_ALBUM_20260802_260802_7.jpg" alt="高級 四万十ポークソーセージ"><div><h3>高級 四万十ポークソーセージ</h3><p>店長おすすめの一押しメニュー</p><p class="menu-price">3本 ¥800</p></div></article>
+            </div><div class="menu-board"><h3>フードメニュー一覧</h3><img src="763402111_18077131817384576_8754646009815865240_n.jpg" alt="GARÇON GORILLA フード・ドリンクメニュー一覧"></div></div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" type="button" aria-expanded="false" aria-controls="drink-panel" id="drink-trigger"><span class="accordion-title"><small>Drink</small><span>ドリンクメニュー</span></span><span class="accordion-mark" aria-hidden="true">＋</span></button>
+            <div class="accordion-panel" id="drink-panel" role="region" aria-labelledby="drink-trigger" hidden><div class="menu-list">
+              <article class="menu-card"><img src="LINE_ALBUM_20260802_260802_5.jpg" alt="LUC BELAIRE FANTÔME"><div><h3>LUC BELAIRE FANTÔME</h3><p>レアロゼ ファントム／ゴールド ファントム</p><p class="menu-price">BOTTLE ¥10,000</p></div></article>
+              <article class="menu-card"><img src="LINE_ALBUM_20260802_260802_4.jpg" alt="DON JULIO 1942 MINI"><div><h3>DON JULIO 1942 MINI</h3><p>100% AGAVE</p><p class="menu-price">1本 ¥6,000／10本 ¥60,000</p></div></article>
+            </div><img class="full-menu-image" src="LINE_ALBUM_20260802_260802_6.jpg" alt="ドリンクメニュー一覧"><div style="height:24px"></div></div>
+          </div>
         </div>
-    </footer>
+      </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- 1. 日付UIの生成（当日から8/31まで） ---
-            const dateButtonsContainer = document.getElementById('dateButtons');
-            const selectedDateInput = document.getElementById('selectedDate');
-            const today = new Date();
-            const days = ['日', '月', '火', '水', '木', '金', '土'];
+      <section class="section info" id="info">
+        <div class="section-head"><p class="section-label">Information</p><h2>店舗情報</h2></div>
+        <div class="info-card"><dl>
+          <div class="info-row"><dt>店名</dt><dd>ギャルソンゴリラ<br><small>GARÇON GORILLA</small></dd></div>
+          <div class="info-row"><dt>ジャンル</dt><dd>海の家・韓国ビストロ・ビーチパブ</dd></div>
+          <div class="info-row"><dt>住所</dt><dd>〒248-0014<br>神奈川県鎌倉市由比ガ浜4丁目 海浜浴場<br>鎌倉BEACH RESORT内</dd></div>
+          <div class="info-row"><dt>営業期間</dt><dd>2026年7月1日〜8月31日</dd></div>
+          <div class="info-row"><dt>営業時間</dt><dd>9:00〜21:00（最終入店20:30）</dd></div>
+        </dl><a class="cta map-link" href="https://maps.app.goo.gl/7MMT5PmqSkNELGRs6?g_st=ic" target="_blank" rel="noopener noreferrer">Googleマップで見る</a></div>
+      </section>
 
-            // 終了日を今年の8月31日に設定 (※月は0から始まるため7が8月)
-            const endDate = new Date(today.getFullYear(), 7, 31);
-            
-            // 今日から8月31日までの日数を計算
-            let diffTime = endDate.getTime() - today.getTime();
-            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            
-            // 既に8/31以降の場合はフェイルセーフとして14日間分表示
-            if (diffDays < 0) diffDays = 14; 
+      <section class="section reservation" id="reservation">
+        <div class="section-head"><p class="section-label">Reservation</p><h2>予約する</h2></div>
+        <div class="form-card">
+          <form id="reserve-form">
+            <div class="form-grid">
+              <div class="field full"><label class="field-label" for="name">お名前<span class="required">必須</span></label><input id="name" name="name" autocomplete="name" placeholder="例：山田 太郎（フルネーム）" required></div>
+              <fieldset class="field full"><legend>予約日<span class="required">必須</span></legend><p class="date-hint">日付を横にスクロールできます（8月31日まで）</p><div class="date-quick" id="quick-dates"></div><label class="calendar-wrap" for="date"><span aria-hidden="true">📅</span><input id="date" name="date" type="date" min="2026-07-01" max="2026-08-31" required></label></fieldset>
+              <div class="field"><label class="field-label" for="time">予約時間<span class="required">必須</span></label><select id="time" name="time" required></select></div>
+              <div class="field"><label class="field-label" for="people">人数<span class="required">必須</span></label><select id="people" name="people" required></select></div>
+              <fieldset class="field full"><legend>注文内容<span class="required">必須</span></legend><div class="radio-list">
+                <label class="choice"><input type="radio" name="order_plan" value="席のみ（混雑時2時間制）" data-price="0" required><span>席のみ<small>混雑時2時間制・料金は店舗でのご注文により決まります</small></span></label>
+                <label class="choice"><input type="radio" name="order_plan" value="（学生）サムギョプサルセット＆飲み放題" data-price="3500" required><span>学生・サムギョプサルセット＆飲み放題<small>1人 3,500円</small></span></label>
+                <label class="choice"><input type="radio" name="order_plan" value="（学生）ジンギスカンセット＆飲み放題" data-price="3500" required><span>学生・ジンギスカンセット＆飲み放題<small>1人 3,500円</small></span></label>
+                <label class="choice"><input type="radio" name="order_plan" value="（大人）サムギョプサルセット＆飲み放題" data-price="4500" required><span>大人・サムギョプサルセット＆飲み放題<small>1人 4,500円</small></span></label>
+                <label class="choice"><input type="radio" name="order_plan" value="（大人）ジンギスカンセット＆飲み放題" data-price="4500" required><span>大人・ジンギスカンセット＆飲み放題<small>1人 4,500円</small></span></label>
+              </div></fieldset>
+              <fieldset class="field full"><legend>予約でシャンパンがお得！<span class="optional">任意</span></legend><div class="champagne-list">
+                <label class="champagne-row"><span><strong>カフェパリ</strong><small><s>6,000円</s> → 5,500円</small></span><input type="number" name="champagne_cafe_de_paris" min="0" max="20" value="0" data-label="カフェパリ" data-price="5500" aria-label="カフェパリの本数"></label>
+                <label class="champagne-row"><span><strong>Rose</strong><small><s>12,000円</s> → 11,000円</small></span><input type="number" name="champagne_rose" min="0" max="20" value="0" data-label="Rose" data-price="11000" aria-label="Roseの本数"></label>
+                <label class="champagne-row"><span><strong>ヴーヴクリコ イエローラベル</strong><small><s>33,000円</s> → 30,000円</small></span><input type="number" name="champagne_veuve" min="0" max="20" value="0" data-label="ヴーヴクリコ イエローラベル" data-price="30000" aria-label="ヴーヴクリコ イエローラベルの本数"></label>
+              </div></fieldset>
+              <div class="field"><label class="field-label" for="email">メールアドレス<span class="required">必須</span></label><input id="email" name="email" type="email" autocomplete="email" placeholder="mail@example.com" required></div>
+              <div class="field"><label class="field-label" for="phone">電話番号<span class="required">必須</span></label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="090-1234-5678" required></div>
+              <div class="field full summary" aria-live="polite"><h3>ご注文内容の合計</h3><div class="summary-line"><span>プラン料金</span><strong id="plan-summary">未選択</strong></div><div class="summary-line"><span>シャンパン</span><strong id="champagne-summary">0円</strong></div><div class="summary-line summary-total"><span>合計金額</span><strong id="total-summary">—</strong></div><input type="hidden" name="champagne" id="champagne-data"><input type="hidden" name="total_amount" id="total-data"><input type="hidden" name="reservation_id" id="reservation-id"></div>
+            </div>
+            <p class="privacy">入力情報は予約受付・確認のためにのみ使用します。送信すると予約が確定し、入力したメールアドレスへ予約確定メールをお送りします。</p>
+            <button class="submit-button" type="submit">この内容で予約を確定する</button><p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+    <footer><div class="footer-links"><a href="https://www.instagram.com/garcon_gorilla_2026?igsh=c20xMWJ1aGx0Nnp4&utm_source=qr" target="_blank" rel="noopener noreferrer">公式Instagram</a><a href="#top">ページ上部へ</a></div><strong>GARÇON GORILLA</strong><p>鎌倉BEACH RESORT内・由比ヶ浜海岸</p><p>© 2026 GARÇON GORILLA</p></footer>
+  </div>
+  <a class="cta sticky-reserve" href="#reservation">予約する</a>
 
-            for (let i = 0; i <= diffDays; i++) {
-                const d = new Date();
-                d.setDate(today.getDate() + i);
-                const month = d.getMonth() + 1;
-                const date = d.getDate();
-                const day = days[d.getDay()];
-                
-                // YYYY-MM-DD フォーマット
-                const dateStr = `${d.getFullYear()}-${String(month).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
-                
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = 'date-btn';
-                btn.innerHTML = `<span>${month}/${date}</span><br><span class="day-span">(${day})</span>`;
-                btn.dataset.date = dateStr;
-                
-                // 初日をデフォルト選択
-                if (i === 0) {
-                    btn.classList.add('active');
-                    selectedDateInput.value = dateStr;
-                }
-                
-                // クリックイベント
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    selectedDateInput.value = this.dataset.date;
-                });
-                
-                dateButtonsContainer.appendChild(btn);
-            }
-
-            // --- 2. 時間の生成 (9:00〜20:30, 15分刻み) ---
-            const timeSelect = document.getElementById('time');
-            const startHour = 9;
-            const endHour = 20;
-            const endMinute = 30;
-
-            for (let h = startHour; h <= endHour; h++) {
-                for (let m = 0; m < 60; m += 15) {
-                    // 20:30以降はスキップ
-                    if (h === endHour && m > endMinute) continue;
-                    
-                    const timeStr = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
-                    const option = document.createElement('option');
-                    option.value = timeStr;
-                    option.textContent = timeStr;
-                    
-                    // 17:00を一発目で選択状態に
-                    if (timeStr === '17:00') {
-                        option.selected = true;
-                    }
-                    timeSelect.appendChild(option);
-                }
-            }
-
-            // --- 3. 人数の生成 (1〜20名) ---
-            const peopleSelect = document.getElementById('people');
-            for(let i = 1; i <= 20; i++) {
-                const option = document.createElement('option');
-                option.value = i + '名';
-                option.textContent = i + '名';
-                // デフォルトは2名にするなど任意（今回は最初の1名がデフォルト）
-                peopleSelect.appendChild(option);
-            }
-        });
-
-        // --- 4. フォーム送信処理 ---
-        document.getElementById('reserveForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const btn = this.querySelector('.btn_submit');
-            btn.disabled = true;
-            btn.textContent = '送信中...';
-
-            const formData = new FormData(this);
-            const data = {};
-            
-            // 同名のチェックボックス(champagne)をカンマ区切りで一つの文字列にする処理
-            for (let [key, value] of formData.entries()) {
-                if (data[key]) {
-                    data[key] += ', ' + value;
-                } else {
-                    data[key] = value;
-                }
-            }
-
-            // ★ここにGoogle Apps Scriptで発行されたWebアプリURLを貼り付けてください★
-            const GAS_URL = "https://script.google.com/macros/s/AKfycbwbV6nJSIA29pKCt7MKbolSTx-xEE8NfHQOWc3RkxWQZJY9PmBHUc1EtoXMKeqeTsoU8Q/exec";
-
-            try {
-                await fetch(GAS_URL, {
-                    method: 'POST',
-                    mode: 'no-cors', // クロスオリジンのためno-corsを使用
-                    headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify(data)
-                });
-                
-                // no-cors の場合、エラーじゃなくても opaque レスポンスが返るので
-                // ここまで到達すれば送信成功として扱う
-                alert('ご予約が完了しました！ご来店をお待ちしております。');
-                
-                // フォームをリセットし、デフォルト状態に戻す
-                this.reset();
-                document.querySelectorAll('.date-btn').forEach((b, index) => {
-                    b.classList.remove('active');
-                    if(index === 0) {
-                        b.classList.add('active');
-                        document.getElementById('selectedDate').value = b.dataset.date;
-                    }
-                });
-                document.getElementById('time').value = '17:00';
-
-            } catch (err) {
-                alert('送信に失敗しました。時間をおいて再度お試しいただくか、InstagramのDMにてお問い合わせください。');
-            } finally {
-                btn.disabled = false;
-                btn.textContent = 'この内容で予約する';
-            }
-        });
-    </script>
+  <script>
+    (() => {
+      const GAS_URL="https://script.google.com/macros/s/AKfycbwbV6nJSIA29pKCt7MKbolSTx-xEE8NfHQOWc3RkxWQZJY9PmBHUc1EtoXMKeqeTsoU8Q/exec";
+      const seasonStart=new Date("2026-07-01T00:00:00+09:00"),seasonEnd=new Date("2026-08-31T00:00:00+09:00");
+      const yen=value=>new Intl.NumberFormat("ja-JP",{style:"currency",currency:"JPY",maximumFractionDigits:0}).format(value);
+      document.querySelectorAll(".accordion-trigger").forEach(button=>button.addEventListener("click",()=>{const expanded=button.getAttribute("aria-expanded")==="true";button.setAttribute("aria-expanded",String(!expanded));document.getElementById(button.getAttribute("aria-controls")).hidden=expanded;}));
+      const dateInput=document.getElementById("date"),quickDates=document.getElementById("quick-dates"),now=new Date(),weekdays=["日","月","火","水","木","金","土"];
+      now.setHours(0,0,0,0);const firstAvailable=now<seasonStart?seasonStart:now;
+      function updateDateButtons(){document.querySelectorAll(".date-button").forEach(button=>button.classList.toggle("is-active",button.dataset.date===dateInput.value));}
+      if(firstAvailable<=seasonEnd){dateInput.min=`${firstAvailable.getFullYear()}-${String(firstAvailable.getMonth()+1).padStart(2,"0")}-${String(firstAvailable.getDate()).padStart(2,"0")}`;for(let i=0;;i++){const date=new Date(firstAvailable);date.setDate(firstAvailable.getDate()+i);if(date>seasonEnd)break;const value=`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`,button=document.createElement("button");button.type="button";button.className="date-button";button.dataset.date=value;button.innerHTML=`${date.getMonth()+1}/${date.getDate()}<br><small>（${weekdays[date.getDay()]}）</small>`;button.addEventListener("click",()=>{dateInput.value=value;updateDateButtons();button.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"});});quickDates.appendChild(button);}}else{dateInput.disabled=true;quickDates.innerHTML="<p>2026年の営業期間は終了しました。</p>";}
+      dateInput.addEventListener("change",updateDateButtons);
+      const timeSelect=document.getElementById("time");for(let h=9;h<=20;h++){for(let m=0;m<60;m+=15){if(h===20&&m>30)continue;const value=`${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}`;timeSelect.add(new Option(value,value,value==="17:00",value==="17:00"));}}
+      const peopleSelect=document.getElementById("people");for(let count=1;count<=20;count++)peopleSelect.add(new Option(`${count}名`,String(count),count===2,count===2));
+      const form=document.getElementById("reserve-form"),planSummary=document.getElementById("plan-summary"),champagneSummary=document.getElementById("champagne-summary"),totalSummary=document.getElementById("total-summary"),champagneData=document.getElementById("champagne-data"),totalData=document.getElementById("total-data");
+      function calculateTotal(){const plan=form.querySelector('input[name="order_plan"]:checked'),people=Number(peopleSelect.value||0),planPrice=plan?Number(plan.dataset.price):0,planTotal=planPrice*people,items=[];let champagneTotal=0;form.querySelectorAll(".champagne-row input").forEach(input=>{const quantity=Math.max(0,Number(input.value||0)),itemTotal=Number(input.dataset.price)*quantity;if(quantity)items.push(`${input.dataset.label} × ${quantity}本（${yen(itemTotal)}）`);champagneTotal+=itemTotal;});planSummary.textContent=!plan?"未選択":planPrice?`${yen(planTotal)}（${yen(planPrice)} × ${people}名）`:"店舗でのご注文により決定";champagneSummary.textContent=items.length?`${yen(champagneTotal)}（${items.join("、")}）`:"0円";champagneData.value=items.length?items.join(" / "):"なし";if(!plan){totalSummary.textContent="—";totalData.value="";}else if(planPrice===0){totalSummary.textContent=champagneTotal?`${yen(champagneTotal)}＋店内注文分`:"店内注文により決定";totalData.value=totalSummary.textContent;}else{totalSummary.textContent=yen(planTotal+champagneTotal);totalData.value=String(planTotal+champagneTotal);}}
+      form.addEventListener("input",calculateTotal);form.addEventListener("change",calculateTotal);calculateTotal();
+      form.addEventListener("submit",async event=>{event.preventDefault();const submit=form.querySelector("button[type=submit]"),status=document.getElementById("form-status"),reservationId=`GG-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;document.getElementById("reservation-id").value=reservationId;calculateTotal();submit.disabled=true;submit.textContent="予約を送信しています…";status.className="form-status";status.textContent="";const data=Object.fromEntries(new FormData(form).entries());data.people=`${data.people}名`;try{const response=await fetch(GAS_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(data)});if(!response.ok)throw new Error(`HTTP ${response.status}`);const result=await response.json();if(result.result!=="success")throw new Error(result.message||"予約受付側でエラーが発生しました");status.className="form-status success";status.textContent=`予約が完了しました。予約番号は ${reservationId} です。予約確定メールをご確認ください。`;form.reset();document.getElementById("reservation-id").value="";updateDateButtons();calculateTotal();status.scrollIntoView({behavior:"smooth",block:"center"});}catch(error){console.error(error);status.className="form-status error";status.textContent="予約を完了できませんでした。入力内容と通信環境をご確認のうえ、もう一度お試しください。改善しない場合はInstagramのDMからお問い合わせください。";}finally{submit.disabled=false;submit.textContent="この内容で予約を確定する";}});
+    })();
+  </script>
 </body>
 </html>
