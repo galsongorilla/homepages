@@ -10,6 +10,64 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="messageImage_1787394930764.jpg">
   <title>GARÇON GORILLA 2026 | 由比ヶ浜の海の家</title>
+  <!-- Google Analytics 4: 実際のMeasurement IDへの変更は次の1行だけ -->
+  <script>
+    const GA_MEASUREMENT_ID = "G-F04QNTSP7N";
+
+    (() => {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+
+      function trackEvent(eventName, params = {}) {
+        if (typeof window.gtag !== "function") return;
+        const eventParams = {
+          page_path: window.location.pathname,
+          ...params
+        };
+        window.gtag("event", eventName, eventParams);
+
+        // プレースホルダー使用中だけ、ブラウザで発火確認できるようにします。
+        if (GA_MEASUREMENT_ID.endsWith("XXXXXXXXXX")) {
+          console.debug("[GA4 debug]", eventName, JSON.stringify(eventParams));
+        }
+      }
+
+      window.trackEvent = trackEvent;
+
+      if (!document.querySelector("script[data-ga4-loader]")) {
+        const gaScript = document.createElement("script");
+        gaScript.async = true;
+        gaScript.dataset.ga4Loader = "true";
+        gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA_MEASUREMENT_ID)}`;
+        document.head.appendChild(gaScript);
+      }
+
+      window.gtag("js", new Date());
+      window.gtag("config", GA_MEASUREMENT_ID, { send_page_view: true });
+      if (GA_MEASUREMENT_ID.endsWith("XXXXXXXXXX")) {
+        console.debug("[GA4 debug]", "page_view", JSON.stringify({ page_path: window.location.pathname }));
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const trackedClicks = new WeakSet();
+
+        document.addEventListener("click", event => {
+          if (trackedClicks.has(event) || !(event.target instanceof Element)) return;
+
+          const target = event.target.closest("[data-ga-event], a[href^='tel:']");
+          if (!target) return;
+
+          trackedClicks.add(event);
+          trackEvent(target.dataset.gaEvent || "phone_click", {
+            location: target.dataset.gaLocation || "page_content",
+            button_name: target.dataset.gaButtonName || target.textContent.trim(),
+            link_url: target.href || undefined
+          });
+        }, { passive: true });
+
+      });
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -152,7 +210,7 @@
         <p class="eyebrow">Yuigahama Beach House</p>
         <h1>浴びるほどの<br><span>夏しよう</span></h1>
         <p class="hero-meta">由比ヶ浜海岸 ／ 2026.7.1–8.31 ／ 9:00–21:00<br><small>最終入店 20:30</small></p>
-        <div class="price-banner"><div><small>飲み放題＆海ギョプサル・学割</small><div class="price">¥3,500 <span>/ 人</span></div></div><a class="cta" href="#reservation">今すぐ予約</a></div>
+        <div class="price-banner"><div><small>飲み放題＆海ギョプサル・学割</small><div class="price">¥3,500 <span>/ 人</span></div></div><a class="cta" href="#reservation" data-ga-event="reservation_start" data-ga-location="hero" data-ga-button-name="今すぐ予約">今すぐ予約</a></div>
       </div>
     </header>
 
@@ -167,7 +225,7 @@
           <div class="service-card"><span class="service-icon" aria-hidden="true">⛱️</span>日陰席あり</div>
           <div class="service-card"><span class="service-icon" aria-hidden="true">🍟</span>他店フードOK</div>
         </div>
-        <div class="campaign"><div class="instagram-cta"><span class="instagram-hint">↓をクリック！</span><a class="instagram-link" href="https://www.instagram.com/garcon_gorilla_2026?igsi=anRmb2YxczR2YzM1" target="_blank" rel="noopener noreferrer" aria-label="GARÇON GORILLAのInstagramを開く"><span class="instagram-icon" aria-hidden="true"></span></a></div><p><strong>フォロー＆シェアでドリンクGET！</strong><br>Instagramのフォローとストーリーズでのメンションで、800円以下のドリンクを1杯サービス。</p></div>
+        <div class="campaign"><div class="instagram-cta"><span class="instagram-hint">↓をクリック！</span><a class="instagram-link" href="https://www.instagram.com/garcon_gorilla_2026?igsi=anRmb2YxczR2YzM1" target="_blank" rel="noopener noreferrer" aria-label="GARÇON GORILLAのInstagramを開く" data-ga-event="instagram_click" data-ga-location="service_campaign" data-ga-button-name="Instagramアイコン"><span class="instagram-icon" aria-hidden="true"></span></a></div><p><strong>フォロー＆シェアでドリンクGET！</strong><br>Instagramのフォローとストーリーズでのメンションで、800円以下のドリンクを1杯サービス。</p></div>
       </section>
 
       <section class="section menu-section" id="menu">
@@ -199,7 +257,7 @@
           <div class="info-row"><dt>住所</dt><dd>〒248-0014<br>神奈川県鎌倉市由比ガ浜4丁目 海浜浴場<br>鎌倉BEACH RESORT内</dd></div>
           <div class="info-row"><dt>営業期間</dt><dd>2026年7月1日〜8月31日</dd></div>
           <div class="info-row"><dt>営業時間</dt><dd>9:00〜21:00（最終入店20:30）</dd></div>
-        </dl><a class="cta map-link" href="https://maps.app.goo.gl/7MMT5PmqSkNELGRs6?g_st=ic" target="_blank" rel="noopener noreferrer">Googleマップで見る</a></div>
+        </dl><a class="cta map-link" href="https://maps.app.goo.gl/7MMT5PmqSkNELGRs6?g_st=ic" target="_blank" rel="noopener noreferrer" data-ga-event="map_click" data-ga-location="store_information" data-ga-button-name="Googleマップで見る">Googleマップで見る</a></div>
       </section>
 
       <section class="section reservation" id="reservation">
@@ -228,14 +286,14 @@
               <div class="field full summary" aria-live="polite"><h3>ご注文内容の合計</h3><div class="summary-line"><span>プラン料金</span><strong id="plan-summary">未選択</strong></div><div class="summary-line"><span>シャンパン</span><strong id="champagne-summary">0円</strong></div><div class="summary-line summary-total"><span>合計金額</span><strong id="total-summary">—</strong></div><input type="hidden" name="champagne" id="champagne-data"><input type="hidden" name="total_amount" id="total-data"><input type="hidden" name="reservation_id" id="reservation-id"></div>
             </div>
             <p class="privacy">入力情報は予約受付・確認のためにのみ使用します。送信すると予約が確定し、入力したメールアドレスへ予約確定メールをお送りします。</p>
-            <button class="submit-button" type="submit">この内容で予約を確定する</button><p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+            <button class="submit-button" type="submit" data-ga-event="reservation_submit" data-ga-location="reservation_form" data-ga-button-name="この内容で予約を確定する">この内容で予約を確定する</button><p class="form-status" id="form-status" role="status" aria-live="polite"></p>
           </form>
         </div>
       </section>
     </main>
-    <footer><div class="footer-links"><a href="https://www.instagram.com/garcon_gorilla_2026?igsh=c20xMWJ1aGx0Nnp4&utm_source=qr" target="_blank" rel="noopener noreferrer">公式Instagram</a><a href="#top">ページ上部へ</a></div><strong>GARÇON GORILLA</strong><p>鎌倉BEACH RESORT内・由比ヶ浜海岸</p><p>© 2026 GARÇON GORILLA</p></footer>
+    <footer><div class="footer-links"><a href="https://www.instagram.com/garcon_gorilla_2026?igsh=c20xMWJ1aGx0Nnp4&utm_source=qr" target="_blank" rel="noopener noreferrer" data-ga-event="instagram_click" data-ga-location="footer" data-ga-button-name="公式Instagram">公式Instagram</a><a href="#top">ページ上部へ</a></div><strong>GARÇON GORILLA</strong><p>鎌倉BEACH RESORT内・由比ヶ浜海岸</p><p>© 2026 GARÇON GORILLA</p></footer>
   </div>
-  <a class="cta sticky-reserve" href="#reservation">予約する</a>
+  <a class="cta sticky-reserve" href="#reservation" data-ga-event="reservation_start" data-ga-location="sticky_cta" data-ga-button-name="予約する">予約する</a>
 
   <script>
     (() => {
